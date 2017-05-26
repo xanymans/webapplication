@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="MobileBankingDeploy" basedir="." default="deploy-all" >
+
+	<property file="deploy.properties" />
+    <import file="build.xml" />
+	<target name="stop" >
+		<exec executable="${tomcat_home}/bin/shutdown.${type}" />
+	</target>
+	<target name="undeploy" >
+		<delete file="${tomcat_home}/webapps/${app.name}"/>
+	</target>
+	<target name="deploy" >
+		<copy file="${war.dir}/${app.name}" todir="${tomcat_home}/webapps"/>
+	</target>
+	<target name="start" >
+		<exec executable="${tomcat_home}/bin/startup.${type}" >
+		
+		</exec>
+	</target>
+	<target name="deploy-all" depends="stop,undeploy,deploy,start"/>
+
+	<!-- <target name="check-deploy" >
+		  <condition property="isfiledeployed">
+		  	<available file="${tomcat_home}/webapps/${app.name}" type="file" />
+		  </condition>
+		 <antcall target="deploy-tomcat" />
+			<antcall target="undeploy-tomcat" />
+		</target>
+		<target name="deploy-tomcat" unless="isfiledeployed">
+			<copy file="${war.dir}/${app.name}" todir="${tomcat_home}/webapps"/>
+		</target>
+		<target name="undeploy-tomcat" if="isfiledeployed">
+			<delete file="${tomcat_home}/webapps/${app.name}"/>
+			
+		</target> -->
+
+</project>
