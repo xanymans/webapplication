@@ -40,7 +40,7 @@
 		<war basedir="${web.dir}" destfile="${war.dir}/webapp.war"/>
 		</target>
 
- <target name="all" depends="delete,init,compile_project,package" /> 
+ <target name="all" depends="delete,init,compile,package" /> 
 	
 	
 	<target name="exe_deploy" >
